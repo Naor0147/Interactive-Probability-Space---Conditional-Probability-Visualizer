@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Apple-esque dark palette
+   ══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Surfaces */
+  --surface-0:  #000000;
+  --surface-1:  #0a0a0a;
+  --surface-2:  #111111;
+  --surface-3:  #1a1a1a;
+  --surface-4:  #222222;
+  --surface-5:  #2a2a2a;
+
+  /* Accent palette — vibrant but refined */
+  --accent-blue:    #5ac8fa;
+  --accent-purple:  #bf5af2;
+  --accent-orange:  #ff9f0a;
+  --accent-green:   #30d158;
+  --accent-red:     #ff453a;
+  --accent-teal:    #64d2ff;
+  --accent-pink:    #ff375f;
+
+  /* Event colors — distinct, harmonious on dark */
+  --col-a: #5ac8fa;
+  --col-b: #bf5af2;
+  --col-c: #ff9f0a;
+
+  /* Text hierarchy */
+  --text-primary:    rgba(255,255,255, 0.92);
+  --text-secondary:  rgba(255,255,255, 0.55);
+  --text-tertiary:   rgba(255,255,255, 0.30);
+
+  /* Borders */
+  --border-subtle:   rgba(255,255,255, 0.06);
+  --border-medium:   rgba(255,255,255, 0.10);
+  --border-strong:   rgba(255,255,255, 0.18);
+
+  /* Radii */
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  22px;
+  --radius-xl:  28px;
+
+  /* Transitions */
+  --spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   RESET & BASE
+   ══════════════════════════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--surface-0);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   SCROLLBAR — near invisible
+   ══════════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   GLASS SURFACES
+   ══════════════════════════════════════════════════════════════════════════════ */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(40px) saturate(1.4);
+  -webkit-backdrop-filter: blur(40px) saturate(1.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.04) inset,
+    0 2px 40px rgba(0,0,0,0.25);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 20px rgba(0,0,0,0.15);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   INPUT RANGE — Apple Control-Center style
+   ══════════════════════════════════════════════════════════════════════════════ */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s var(--spring);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: grab;
+  background: #ffffff;
+  border: none;
+  box-shadow:
+    0 1px 4px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(255,255,255,0.1);
+  transition: transform 0.25s var(--spring), box-shadow 0.25s var(--spring);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.15);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.22);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  cursor: grab;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Colored fill for each slider */
+input[type="range"].slider-a {
+  background: linear-gradient(to right, var(--col-a) var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+input[type="range"].slider-b {
+  background: linear-gradient(to right, var(--col-b) var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+input[type="range"].slider-c {
+  background: linear-gradient(to right, var(--col-c) var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+input[type="range"].slider-ab {
+  background: linear-gradient(to right, #8e8ce6 var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+input[type="range"].slider-ac {
+  background: linear-gradient(to right, #7ec8a0 var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+input[type="range"].slider-bc {
+  background: linear-gradient(to right, #e89040 var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+input[type="range"].slider-abc {
+  background: linear-gradient(to right, #aaa var(--val, 50%), var(--surface-3) var(--val, 50%));
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   NUMBER INPUT — Pill-shaped, subtle
+   ══════════════════════════════════════════════════════════════════════════════ */
+input[type="number"] {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  text-align: center;
+  transition: all 0.25s var(--spring);
+  outline: none;
+  padding: 5px 8px;
+  width: 64px;
+}
+
+input[type="number"]:focus {
+  background: var(--surface-3);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(90, 200, 250, 0.12);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   DATA CARD
+   ══════════════════════════════════════════════════════════════════════════════ */
+.data-card {
+  transition:
+    border-color 0.3s var(--spring),
+    box-shadow 0.3s var(--spring),
+    transform 0.35s var(--spring),
+    background 0.3s var(--spring);
+  cursor: default;
+}
+
+.data-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255, 0.05);
+  border-color: var(--border-medium) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   BADGE
+   ══════════════════════════════════════════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   TOOLTIP
+   ══════════════════════════════════════════════════════════════════════════════ */
+.tooltip-content {
+  position: absolute;
+  z-index: 100;
+  pointer-events: none;
+  width: 260px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   VENN PULSE
+   ══════════════════════════════════════════════════════════════════════════════ */
+@keyframes venn-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.85; }
+}
+
+.venn-highlight {
+  animation: venn-pulse 2s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   SECTION LABEL
+   ══════════════════════════════════════════════════════════════════════════════ */
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   AMBIENT GLOW — subtle background orb
+   ══════════════════════════════════════════════════════════════════════════════ */
+.ambient-glow {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.08;
+  z-index: -1;
+}
